@@ -73,5 +73,19 @@ namespace example_app.Controllers
 
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var user  = await context.Users.FindAsync(id);
+            
+            if(user == null) 
+                return NotFound();
+
+            context.Users.Remove(user);
+
+            await context.SaveChangesAsync();
+
+            return Ok(id);
+        }
     }
 }

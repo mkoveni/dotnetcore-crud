@@ -22,7 +22,7 @@
             <td>{{ user.role.name }}</td>
             <td>
                 <a [routerLink]="['/users/update', user.id]">Update</a> 
-                | <a href="#">Delete</a></td>
+                | <a (click)="delete(user)">Delete</a></td>
         </tr>
     </tbody>
 </table>

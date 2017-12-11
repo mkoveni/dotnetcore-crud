@@ -29,14 +29,14 @@ export class Create {
 
         let roleId = parseInt(this.roleId)
         let user: User = {
-            Id: 0,
-            Name: this.name,
-            Email: this.email,
-            Password: this.password,
-            RoleId: roleId,
-            Role: {
-                Id: roleId,
-                Name: ''
+            id: 0,
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            roleId: roleId,
+            role: {
+                id: roleId,
+                name: ''
             }
         };
         

@@ -31,4 +31,10 @@ export class UserService
         return this.http.get('http://localhost:5000/users/'+id)
                 .map(response => response.json())
     }
+
+    deleteUser(id: number) {
+
+        return this.http.delete('http://localhost:5000/users/'+id)
+                    .map(response => response.json());
+    }
 }

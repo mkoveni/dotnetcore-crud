@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { UserService } from '../../services/user.service';
+import {Router} from '@angular/router'
 
 @Component({
     selector: 'users',
@@ -8,7 +9,7 @@ import { UserService } from '../../services/user.service';
 })
 export class Users {
     users:User[] = [];
-    constructor(private userService:UserService) {
+    constructor(private userService:UserService,  private router: Router) {
         
         this.userService.getUsers()
                         .subscribe(users => {
@@ -16,22 +17,37 @@ export class Users {
         });
     }
 
+    delete(user: any) {
+
+        if(confirm('Are you sure about deleting '+ user.name+'?'))
+        {
+            console.log('deleted')
+            this.userService.deleteUser(user.id)
+                .subscribe(id => {
+                    console.log(id)
+                
+                
+                    this.users = this.users.filter(u => u.id !== id);
+                })
+
+        }
+    }
 
 }
 
 export interface User
 {
-    Id: number;
-    Name:string;
-    Email: string;
-    Password: string;
-    RoleId: number;
-    Role: Role;
+    id: number;
+    name:string;
+    email: string;
+    password: string;
+    roleId: number;
+    role: Role;
 }
 
 export interface Role
 {
-    Id:number;
-    Name: string;
+    id:number;
+    name: string;
 }
 
