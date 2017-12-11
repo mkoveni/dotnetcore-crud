@@ -25,6 +25,7 @@ export interface User
     Name:string;
     Email: string;
     Password: string;
+    RoleId: number;
     Role: Role;
 }
 

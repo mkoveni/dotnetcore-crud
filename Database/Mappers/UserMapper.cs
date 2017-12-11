@@ -11,6 +11,7 @@ namespace example_app.Database.Mappers
         {
             CreateMap<Role, RoleResource>();
             CreateMap<User, UserResource>()
+                .ForMember(ur => ur.Id, opt => opt.MapFrom(u => u.Id))
                 .ForMember(ur => ur.Name, opt => opt.MapFrom(u => u.Name))
                 .ForMember(ur => ur.Email, opt => opt.MapFrom(u => u.Email))
                 .ForMember(ur => ur.Password, opt => opt.MapFrom(u => u.Password))
@@ -21,10 +22,12 @@ namespace example_app.Database.Mappers
 
             //Resource to Model
             CreateMap<UserResource, User>()
+                .ForMember(u => u.Id, opt => opt.MapFrom(ur => ur.Id))
                 .ForMember(u => u.Name, opt => opt.MapFrom( ur => ur.Name))
                 .ForMember(u => u.Email, opt => opt.MapFrom( ur => ur.Email))
                 .ForMember(u => u.Password, opt => opt.MapFrom( ur => ur.Password))
-                .ForMember(u => u.RoleId, opt => opt.MapFrom(ur => ur.RoleId));          
+                .ForMember(u => u.RoleId, opt => opt.MapFrom(ur => ur.RoleId))
+                .ForMember(u => u.Role, opt => opt.Ignore());          
         }
     }
 }

@@ -1,7 +1,7 @@
+import { User } from './../components/list/users.component';
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import "rxjs/add/operator/map"
-import { User } from "../components/list/users.component";
 
 @Injectable()
 export class UserService
@@ -18,5 +18,17 @@ export class UserService
 
         return this.http.post('http://localhost:5000/users/create', user)
             .map(response => response.json());
-    } 
+    }
+
+    updateUser(user:any) {
+        console.log(user.id);
+        return this.http.put('http://localhost:5000/users/' + user.id, user)
+                .map(response => response.json());
+    }
+
+    findUserById(id: number) {
+
+        return this.http.get('http://localhost:5000/users/'+id)
+                .map(response => response.json())
+    }
 }

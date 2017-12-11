@@ -15,7 +15,7 @@ export class Create {
     name:string;
     email:string;
     password:string;
-    roleId: number;
+    roleId: any;
 
     constructor(private roleService: RoleService, private userService:UserService, private router: Router){}
 
@@ -27,23 +27,25 @@ export class Create {
 
     save() {
 
+        let roleId = parseInt(this.roleId)
         let user: User = {
             Id: 0,
             Name: this.name,
             Email: this.email,
             Password: this.password,
+            RoleId: roleId,
             Role: {
-                Id: 0,
+                Id: roleId,
                 Name: ''
             }
         };
-
+        
         this.userService.createUser(user)
             .subscribe(user => {
                 console.log(user);
 
                 this.router.navigateByUrl('/users/list');
-            })
+            }, error => console.log(error));
         
     }
 }

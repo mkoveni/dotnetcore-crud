@@ -43,5 +43,35 @@ namespace example_app.Controllers
             return Ok(resource);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id,[FromBody] UserResource userResource) {
+
+            var toUpdate = await context.Users.FindAsync(id);
+            
+            if(toUpdate == null)
+                return NotFound();
+            mapper.Map<UserResource, User>(userResource, toUpdate);
+            
+            await context.SaveChangesAsync();
+
+            var resource = mapper.Map<User,UserResource>(toUpdate);
+
+            return Ok(resource);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var user = await context.Users.Include(u => u.Role).SingleOrDefaultAsync(p => p.Id == id);
+
+            if(user == null)
+                return NotFound();
+
+            var resource = mapper.Map<User, UserResource>(user);
+
+            return Ok(user);
+
+        }
+
     }
 }
