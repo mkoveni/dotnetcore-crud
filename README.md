@@ -9,6 +9,6 @@ $ npm install
 
 $ dotnet restore
 
-After you have modified the app.settings.Development.json file, then you run migrations using the following command
+After you have modified the app.settings.Development.json file, then you run migrations using the following command.
 
 $ dotnet ef database update
