@@ -1,0 +1,28 @@
+<h1>App Users</h1>
+
+<p>This component demostrates retrieving users from the data</p>
+
+<p *ngIf="!users"><em>Loading...</em></p>
+
+<table class='table' *ngIf="users">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <td>Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role.name }}</td>
+            <td>
+                <a [routerLink]="['/users/update', user.id]">Update</a> 
+                | <a href="#">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
